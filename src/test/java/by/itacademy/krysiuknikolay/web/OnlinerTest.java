@@ -28,4 +28,15 @@ public class OnlinerTest {
 
     driver.quit();
     }
+    @Test
+    public void testOnlinerLoginFormWithEmptyCredentials () {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(OnlinerPage.URL);
+        driver.findElement(By.xpath("//div[@class='auth-bar__item auth-bar__item--text']")).click();
+        driver.findElement(By.xpath("//div[@class='auth-form__control auth-form__control_condensed-additional']/button[@type='submit']")).click();
+        Assert.assertEquals("Укажите ник или e-mail",driver.findElement(By.xpath("//text()[contains(., 'Укажите ник или e-mail')]")).getText());
+        Assert.assertEquals("Укажите пароль",driver.findElement(By.xpath("//text()[contains(., 'Укажите пароль')]")).getText());
+        driver.quit();
+    }
 }
