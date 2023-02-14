@@ -25,7 +25,7 @@ public class OnlinerTest {
         driver.manage().window().maximize();
         driver.get(OnlinerPage.URL);
         driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
-        Assert.assertEquals("Вход", driver.findElement(By.xpath(OnlinerPage.FORM_HEADER_TEXT_ENTRANCE)).getText());
+        Assert.assertEquals("Вход", driver.findElement(By.xpath(OnlinerPage.FORM_HEADER_TEXT)).getText());
 
         driver.quit();
     }
