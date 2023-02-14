@@ -46,7 +46,7 @@ public class OnlinerTest {
         driver.manage().window().maximize();
         driver.get(OnlinerPage.URL);
         driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
-        driver.findElement(By.xpath("//input[@placeholder='Ник или e-mail']")).sendKeys("test@gmail.com");
+        driver.findElement(By.xpath(OnlinerPage.LOGIN_ENTRY_WINDOW)).sendKeys("test@gmail.com");
         driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_NEW_PAGE)).click();
         Thread.sleep(2000);
         Assert.assertEquals("Укажите пароль", driver.findElement(By.xpath(OnlinerPage.EMPTY_PASWORD_ELEMENT)).getText());

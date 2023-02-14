@@ -10,4 +10,6 @@ public class OnlinerPage {
     public static final String EMPTY_EMAIL_AND_LOGIN_ELEMENT = "//*[@id=\"auth-container\"]/div/div[2]/div/form/div[1]/div/div[2]/div/div/div[2]/div";
     public static final String EMPTY_PASWORD_ELEMENT = "//*[@id=\"auth-container\"]/div/div[2]/div/form/div[2]/div/div/div[2]/div";
 
+    public static final String LOGIN_ENTRY_WINDOW = "//input[@placeholder='Ник или e-mail']";
+
 }
