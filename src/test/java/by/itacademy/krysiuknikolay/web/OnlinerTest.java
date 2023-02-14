@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OnlinerTest {
     @Test
@@ -23,8 +22,8 @@ public class OnlinerTest {
     WebDriver driver = new ChromeDriver();
     driver.manage().window().maximize();
     driver.get(OnlinerPage.URL);
-    driver.findElement(By.xpath("//div[@class='auth-bar__item auth-bar__item--text']")).click();
-    Assert.assertEquals("Вход",driver.findElement(By.xpath("//div[@class='auth-form__title auth-form__title_big auth-form__title_condensed-default']")).getText());
+    driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
+    Assert.assertEquals("Вход",driver.findElement(By.xpath(OnlinerPage.FORM_HEADER_TEXT_ENTRANCE)).getText());
 
     driver.quit();
     }
@@ -33,11 +32,11 @@ public class OnlinerTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(OnlinerPage.URL);
-        driver.findElement(By.xpath("//div[@class='auth-bar__item auth-bar__item--text']")).click();
-        driver.findElement(By.xpath("//div[@class='auth-form__control auth-form__control_condensed-additional']/button[@type='submit']")).click();
+        driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
+        driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_NEW_PAGE)).click();
         Thread.sleep(2000);
-        Assert.assertEquals("Укажите ник или e-mail",driver.findElement(By.xpath("//*[@id=\"auth-container\"]/div/div[2]/div/form/div[1]/div/div[2]/div/div/div[2]/div")).getText());
-        Assert.assertEquals("Укажите пароль",driver.findElement(By.xpath("//*[@id=\"auth-container\"]/div/div[2]/div/form/div[2]/div/div/div[2]/div")).getText());
+        Assert.assertEquals("Укажите ник или e-mail",driver.findElement(By.xpath(OnlinerPage.EMPTY_EMAIL_AND_LOGIN_ELEMENT)).getText());
+        Assert.assertEquals("Укажите пароль",driver.findElement(By.xpath(OnlinerPage.EMPTY_PASWORD_ELEMENT)).getText());
 
         driver.quit();
     }
@@ -46,12 +45,12 @@ public class OnlinerTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(OnlinerPage.URL);
-        driver.findElement(By.xpath("//div[@class='auth-bar__item auth-bar__item--text']")).click();
+        driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
         driver.findElement(By.xpath("//input[@placeholder='Ник или e-mail']")).sendKeys("test@gmail.com");
-        driver.findElement(By.xpath("//div[@class='auth-form__control auth-form__control_condensed-additional']/button[@type='submit']")).click();
+        driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_NEW_PAGE)).click();
         Thread.sleep(2000);
-        Assert.assertEquals("Укажите пароль", driver.findElement(By.xpath("//*[@id=\"auth-container\"]/div/div[2]/div/form/div[2]/div/div/div[2]/div")).getText());
-        Assert.assertTrue(driver.findElements(By.xpath("//*[@id=\"auth-container\"]/div/div[2]/div/form/div[1]/div/div[2]/div/div/div[2]/div")).size() == 0);
+        Assert.assertEquals("Укажите пароль", driver.findElement(By.xpath(OnlinerPage.EMPTY_PASWORD_ELEMENT)).getText());
+        Assert.assertTrue(driver.findElements(By.xpath(OnlinerPage.EMPTY_EMAIL_AND_LOGIN_ELEMENT)).size() == 0);
 
         driver.quit();
     }
