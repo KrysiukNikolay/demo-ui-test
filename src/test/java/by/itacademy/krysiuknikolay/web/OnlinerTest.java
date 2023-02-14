@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class OnlinerTest {
     @Test
     public void testOpenOnliner() {
+        //Checking the display of the "copyright" element on the page
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(OnlinerPage.URL);
@@ -19,29 +20,34 @@ public class OnlinerTest {
 
     @Test
     public void testOpenOnlinerLoginForm() {
-    WebDriver driver = new ChromeDriver();
-    driver.manage().window().maximize();
-    driver.get(OnlinerPage.URL);
-    driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
-    Assert.assertEquals("Вход",driver.findElement(By.xpath(OnlinerPage.FORM_HEADER_TEXT_ENTRANCE)).getText());
+        //Checking the display of an element "Вход" on the next page
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(OnlinerPage.URL);
+        driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
+        Assert.assertEquals("Вход", driver.findElement(By.xpath(OnlinerPage.FORM_HEADER_TEXT_ENTRANCE)).getText());
 
-    driver.quit();
+        driver.quit();
     }
+
     @Test
     public void testOnlinerLoginFormWithEmptyCredentials() throws InterruptedException {
+        //Log in to the authorization page and enter empty values
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(OnlinerPage.URL);
         driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
         driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_NEW_PAGE)).click();
         Thread.sleep(2000);
-        Assert.assertEquals("Укажите ник или e-mail",driver.findElement(By.xpath(OnlinerPage.EMPTY_EMAIL_AND_LOGIN_ELEMENT)).getText());
-        Assert.assertEquals("Укажите пароль",driver.findElement(By.xpath(OnlinerPage.EMPTY_PASWORD_ELEMENT)).getText());
+        Assert.assertEquals("Укажите ник или e-mail", driver.findElement(By.xpath(OnlinerPage.EMPTY_EMAIL_AND_LOGIN_ELEMENT)).getText());
+        Assert.assertEquals("Укажите пароль", driver.findElement(By.xpath(OnlinerPage.EMPTY_PASWORD_ELEMENT)).getText());
 
         driver.quit();
     }
+
     @Test
     public void testOnlinerLoginFormWithEmptyPassword() throws InterruptedException {
+        //Log in to the authorization page and enter a value in the email and an empty value in the password
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(OnlinerPage.URL);
