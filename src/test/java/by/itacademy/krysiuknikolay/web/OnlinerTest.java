@@ -59,7 +59,7 @@ public class OnlinerTest {
     }
     @Test
     public void testOnlinerPasswordWithEmptyLoginForm() {
-        //Log in to the authorization page and enter a value in the email and an empty value in the password
+        //Log in to the authorization page and enter an empty value in the email and the full value in the password
         driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
         driver.findElement(By.xpath(OnlinerPage.PASSWORD_ENTRY_WINDOW)).sendKeys("test");
         driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_NEW_PAGE)).click();
