@@ -15,5 +15,6 @@ public class OnlinerPage {
     public static final String EMPTY_PASWORD_ERROR_EXPECTED_TEXT = "Укажите пароль";
 
     public static final String LOGIN_ENTRY_WINDOW = "//input[@placeholder='Ник или e-mail']";
+    public static final String PASSWORD_ENTRY_WINDOW = "//input[@type='password']";
 
 }

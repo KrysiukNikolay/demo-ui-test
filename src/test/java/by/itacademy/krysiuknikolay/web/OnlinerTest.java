@@ -57,6 +57,15 @@ public class OnlinerTest {
         String actualPasswordErrorText = driver.findElement(By.xpath(OnlinerPage.EMPTY_PASWORD_ERROR_XPATH)).getText();
         Assert.assertEquals(OnlinerPage.EMPTY_PASWORD_ERROR_EXPECTED_TEXT,actualPasswordErrorText );
     }
+    @Test
+    public void testOnlinerPasswordWithEmptyLoginForm() {
+        //Log in to the authorization page and enter a value in the email and an empty value in the password
+        driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_BASIC)).click();
+        driver.findElement(By.xpath(OnlinerPage.PASSWORD_ENTRY_WINDOW)).sendKeys("test");
+        driver.findElement(By.xpath(OnlinerPage.BTN_AUTORIZATION_NEW_PAGE)).click();
+        String actualPasswordErrorText = driver.findElement(By.xpath(OnlinerPage.EMPTY_EMAIL_ERROR_XPATH)).getText();
+        Assert.assertEquals(OnlinerPage.EMPTY_EMAIL_ERROR_EXPECTED_TEXT,actualPasswordErrorText );
+    }
 
     @After
     public void after() {
