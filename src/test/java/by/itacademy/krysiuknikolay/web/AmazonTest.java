@@ -1,55 +1,59 @@
 package by.itacademy.krysiuknikolay.web;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+
 public class AmazonTest {
+    WebDriver driver;
+
+    @Before
+    public void warmUP() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        driver.get(AmazonPage.URL);
+    }
+
     @Test
     public void testOpenAmazon() {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(AmazonPage.URL);
-        Assert.assertEquals("© 1996-2023, Amazon.com, Inc. or its affiliates", driver.findElement(By.xpath(AmazonPage.COPYRIGHT)).getText());
-
-        driver.quit();
+        String actualCopyrightText = driver.findElement(By.xpath(AmazonPage.COPYRIGHT_XPATH)).getText();
+        Assert.assertEquals(AmazonPage.COPYRIGHT_EXPECTED_TEXT, actualCopyrightText);
     }
+
     @Test
-    public void testOpenAmazonCart() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(AmazonPage.URL);
+    public void testOpenAmazonCart() {
         driver.findElement(By.xpath(AmazonPage.BTN_CART)).click();
-        Thread.sleep(2000);
-        Assert.assertEquals("Your Amazon Cart is empty", driver.findElement(By.xpath(AmazonPage.FORM_HEADER_TEXT_CART_IS_EMPTY)).getText());
-
-        driver.quit();
+        String actualCartText = driver.findElement(By.xpath(AmazonPage.FORM_HEADER_TEXT_CART_IS_EMPTY_XPATH)).getText();
+        Assert.assertEquals(AmazonPage.FORM_HEADER_TEXT_CART_IS_EMPTY_EXPECTED_TEXT, actualCartText);
     }
+
     @Test
-    public void testOpenAmazonLoginForm() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(AmazonPage.URL);
+    public void testOpenAmazonLoginForm() {
         driver.findElement(By.xpath(AmazonPage.BTN_CART)).click();
         driver.findElement(By.xpath(AmazonPage.BTN_SIGN_IN_TO_YOUR_ACCOUNT)).click();
-        Thread.sleep(2000);
-        Assert.assertEquals("Sign in", driver.findElement(By.xpath(AmazonPage.FORM_HEADER_TEXT_SIGN_IN)).getText());
-
-        driver.quit();
+        String actualSignText = driver.findElement(By.xpath(AmazonPage.FORM_HEADER_TEXT_SIGN_IN_XPATH)).getText();
+        Assert.assertEquals(AmazonPage.FORM_HEADER_TEXT_SIGN_IN_EXPECTED_TEXT, actualSignText);
     }
+
     @Test
-    public void testAmazonLoginFormWithEmptyCredentials() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get(AmazonPage.URL);
+    public void testAmazonLoginFormWithEmptyCredentials() {
         driver.findElement(By.xpath(AmazonPage.BTN_CART)).click();
         driver.findElement(By.xpath(AmazonPage.BTN_SIGN_IN_TO_YOUR_ACCOUNT)).click();
         driver.findElement(By.xpath(AmazonPage.BTN_CONTINUE)).click();
-        Thread.sleep(2000);
-        Assert.assertEquals("Enter your email or mobile phone number",driver.findElement(By.xpath(AmazonPage.FORM_EMPTY_YOUR_EMAIL)).getText());
+        String actualEmailText = driver.findElement(By.xpath(AmazonPage.FORM_EMPTY_YOUR_EMAIL_XPATH)).getText();
+        Assert.assertEquals(AmazonPage.FORM_EMPTY_YOUR_EMAIL_EXPECTED_TEXT, actualEmailText);
+    }
 
+    @After
+    public void out() {
+        driver.quit();
     }
 
 }
